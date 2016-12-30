@@ -1,0 +1,26 @@
+<h1>Pablo's Recipe Finder</h1>
+<p>Powered By Food2Fork.com</p>
+
+<% if @recipes.nil? %>
+
+<p>No recipes found.</p>
+
+<% else %>
+
+<table border="1">
+  <tr>
+  	<th>Image</th>
+  	<th>Title</th>
+  	<th>Social Ranking</th>
+  </tr>
+  <% @recipes.each do |recipe| %>
+    <tr class=<%= cycle('even', 'odd') %>>
+      <% linkToRecipe = recipe["f2f_url"] %>
+      <td><%= link_to(image_tag(recipe["image_url"], size: "100x100"), linkToRecipe) %></td>
+      <td><%= link_to(sanitize(recipe["title"]), linkToRecipe) %></td>
+      <td><%= recipe["social_rank"] %></td>
+    </tr>
+  <% end %>
+</table>
+
+<% end %>
